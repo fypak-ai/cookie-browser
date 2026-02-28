@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookie Browser</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <span class="logo">🍪 Cookie Browser</span>
+        <button id="toggleSidebar" title="Recolher">‹</button>
+      </div>
+
+      <section class="section">
+        <h3>URL do Navegador</h3>
+        <div class="url-bar">
+          <input type="text" id="urlInput" placeholder="https://www.youtube.com" />
+          <button id="goBtn">Ir</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>Cookies <span id="cookieCount" class="badge">0</span></h3>
+        <div class="btn-row">
+          <button id="importBtn" class="btn-secondary">📥 Importar JSON</button>
+          <button id="exportBtn" class="btn-secondary">📤 Exportar JSON</button>
+          <button id="injectBtn" class="btn-primary">💉 Injetar</button>
+          <button id="clearBtn" class="btn-danger">🗑 Limpar</button>
+        </div>
+        <input type="file" id="fileInput" accept=".json" style="display:none" />
+        <textarea id="cookieTextarea" placeholder='Cole o JSON de cookies aqui...'></textarea>
+      </section>
+
+      <section class="section">
+        <h3>Cookies Ativos</h3>
+        <div id="cookieList" class="cookie-list"></div>
+      </section>
+
+      <section class="section">
+        <h3>Log</h3>
+        <div id="logBox" class="log-box"></div>
+      </section>
+    </aside>
+
+    <!-- Main -->
+    <main id="main">
+      <div id="iframeWrapper">
+        <div id="iframeBar">
+          <span id="currentUrl">youtube.com</span>
+          <button id="reloadBtn" title="Recarregar">↺</button>
+          <button id="openNewTab" title="Abrir em nova aba">⎋</button>
+        </div>
+        <div id="iframeOverlay">
+          <p>⚠️ Este site bloqueou a exibição em iframe.</p>
+          <p>Use o botão <strong>"Abrir em nova aba"</strong> para acessar com os cookies injetados.</p>
+          <button id="overlayOpenBtn">Abrir em nova aba ↗</button>
+        </div>
+        <iframe id="browserFrame" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation" src="about:blank"></iframe>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
