@@ -11,32 +11,39 @@
     <!-- Sidebar -->
     <aside id="sidebar">
       <div class="sidebar-header">
-        <span class="logo">🍪 Cookie Browser</span>
-        <button id="toggleSidebar" title="Recolher">‹</button>
+        <span class="logo">&#127850; Cookie Browser</span>
+        <button id="toggleSidebar" title="Recolher">&#8249;</button>
       </div>
 
       <section class="section">
-        <h3>URL do Navegador</h3>
+        <h3>URL Alvo</h3>
         <div class="url-bar">
-          <input type="text" id="urlInput" placeholder="https://www.youtube.com" />
-          <button id="goBtn">Ir</button>
+          <input type="text" id="urlInput" value="https://www.youtube.com" />
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>A&#231;&#245;es</h3>
+        <div class="btn-col">
+          <button id="openYoutubeBtn" class="btn-primary btn-lg">&#127919; Abrir YouTube com Cookies</button>
+          <button id="bookmarkletBtn" class="btn-secondary btn-lg">&#128278; Gerar Bookmarklet</button>
+          <button id="copyConsoleBtn" class="btn-secondary btn-lg">&#128203; Copiar Script (Console)</button>
         </div>
       </section>
 
       <section class="section">
         <h3>Cookies <span id="cookieCount" class="badge">0</span></h3>
         <div class="btn-row">
-          <button id="importBtn" class="btn-secondary">📥 Importar JSON</button>
-          <button id="exportBtn" class="btn-secondary">📤 Exportar JSON</button>
-          <button id="injectBtn" class="btn-primary">💉 Injetar</button>
-          <button id="clearBtn" class="btn-danger">🗑 Limpar</button>
+          <button id="importBtn" class="btn-secondary">&#128229; Importar JSON</button>
+          <button id="exportBtn" class="btn-secondary">&#128228; Exportar JSON</button>
+          <button id="clearBtn" class="btn-danger">&#128465; Limpar</button>
         </div>
         <input type="file" id="fileInput" accept=".json" style="display:none" />
         <textarea id="cookieTextarea" placeholder='Cole o JSON de cookies aqui...'></textarea>
       </section>
 
       <section class="section">
-        <h3>Cookies Ativos</h3>
+        <h3>Cookies Carregados</h3>
         <div id="cookieList" class="cookie-list"></div>
       </section>
 
@@ -48,21 +55,47 @@
 
     <!-- Main -->
     <main id="main">
-      <div id="iframeWrapper">
-        <div id="iframeBar">
-          <span id="currentUrl">youtube.com</span>
-          <button id="reloadBtn" title="Recarregar">↺</button>
-          <button id="openNewTab" title="Abrir em nova aba">⎋</button>
+      <div id="instructions">
+        <div class="inst-card">
+          <h2>&#127850; Cookie Browser</h2>
+          <p>Injetar cookies em sites como o YouTube requer estar <strong>no mesmo dom&#237;nio</strong>. Use um dos m&#233;todos abaixo:</p>
+
+          <div class="method">
+            <div class="method-num">1</div>
+            <div class="method-body">
+              <strong>Abrir direto (recomendado)</strong>
+              <p>Clique em <em>&#127919; Abrir YouTube com Cookies</em>. O YouTube abre numa nova aba. Em seguida, abra o Console do DevTools (F12 &rarr; Console) e cole o script copiado com <em>&#128203; Copiar Script</em>.</p>
+            </div>
+          </div>
+
+          <div class="method">
+            <div class="method-num">2</div>
+            <div class="method-body">
+              <strong>Bookmarklet</strong>
+              <p>Clique em <em>&#128278; Gerar Bookmarklet</em> e arraste o link gerado para a barra de favoritos. Com o YouTube aberto, clique no favorito para injetar os cookies automaticamente.</p>
+            </div>
+          </div>
+
+          <div class="method">
+            <div class="method-num">3</div>
+            <div class="method-body">
+              <strong>Extensao Cookie Editor</strong>
+              <p>Instale a extens&#227;o <a href="https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm" target="_blank">Cookie Editor</a>, depois clique em <em>&#128228; Exportar JSON</em> para baixar os cookies e importe na extens&#227;o com o YouTube aberto.</p>
+            </div>
+          </div>
+
+          <div id="bookmarkletArea" style="display:none; margin-top:20px;">
+            <p style="color:#a78bfa; font-weight:600; margin-bottom:8px;">Arraste para a barra de favoritos:</p>
+            <a id="bookmarkletLink" href="#" class="bookmarklet-link">&#127850; Injetar Cookies YT</a>
+            <p style="color:#64748b; font-size:12px; margin-top:6px;">Com o YouTube aberto, clique neste favorito.</p>
+          </div>
         </div>
-        <div id="iframeOverlay">
-          <p>⚠️ Este site bloqueou a exibição em iframe.</p>
-          <p>Use o botão <strong>"Abrir em nova aba"</strong> para acessar com os cookies injetados.</p>
-          <button id="overlayOpenBtn">Abrir em nova aba ↗</button>
-        </div>
-        <iframe id="browserFrame" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation" src="about:blank"></iframe>
       </div>
     </main>
   </div>
+
+  <!-- Toast -->
+  <div id="toast"></div>
 
   <script src="app.js"></script>
 </body>
